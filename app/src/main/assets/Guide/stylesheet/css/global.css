@@ -1,0 +1,13 @@
+img {
+  max-width: 100%;
+}
+
+.img:after {
+  content: " ";
+  display: block;
+  white-space: pre;
+}
+
+.container {
+  padding-top: 20px;
+}

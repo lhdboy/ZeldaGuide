@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dev_url">http://baidu.com</string>
+    <string name="stag_url">http://baidu.com</string>
+    <string name="prod_url">http://baidu.com</string>
+</resources>
