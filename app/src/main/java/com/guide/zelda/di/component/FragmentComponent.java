@@ -1,6 +1,7 @@
 package com.guide.zelda.di.component;
 
 
+import com.guide.zelda.home.MapFragment;
 import com.guide.zelda.home.NewestFragment;
 import com.guide.zelda.home.WholeFlowFragment;
 import com.guide.zelda.widget.WebViewFragment;
@@ -21,5 +22,7 @@ public interface FragmentComponent {
     void inject(WholeFlowFragment flowFragment);
 
     void inject(NewestFragment fragment);
+
+    void inject(MapFragment fragment);
 
 }

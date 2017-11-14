@@ -18,13 +18,6 @@ public class WebViewFragment extends BaseFragment {
     @BindView(R.id.web_view_base)
     ProgressWebView webView;
 
-    public static WebViewFragment newInstance() {
-        Bundle args = new Bundle();
-        WebViewFragment fragment = new WebViewFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     public static WebViewFragment newInstance(String title, String url) {
         Bundle args = new Bundle();
         args.putString("key_title", title);

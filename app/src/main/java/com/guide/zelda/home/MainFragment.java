@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -12,8 +11,8 @@ import com.guide.zelda.R;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerFragmentComponent;
+import com.guide.zelda.widget.NoScrollViewPager;
 import com.guide.zelda.widget.TitleView;
-import com.guide.zelda.widget.WebViewFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -37,7 +36,7 @@ public class MainFragment extends BaseFragment implements MainView {
     @BindView(R.id.indicator_main)
     MagicIndicator magicIndicator;
     @BindView(R.id.view_pager)
-    ViewPager viewPager;
+    NoScrollViewPager viewPager;
 
     public static final int TAB_SETTING = 0;
     public static final int TAB_STORE = 1;
@@ -72,6 +71,7 @@ public class MainFragment extends BaseFragment implements MainView {
         presenter.attachView(this);
         titleView.setVisibility(View.GONE);
         StoreAdapter adapter = new StoreAdapter(getActivity().getSupportFragmentManager());
+        viewPager.setNoScroll(true);
         viewPager.setAdapter(adapter);
         initIndicator();
     }
