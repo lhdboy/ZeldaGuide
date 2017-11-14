@@ -103,7 +103,7 @@ public class MapFragment extends BaseFragment implements MapView {
                     .setReceivedTitleCallback((view, title) -> titleView.centerTitle(title))
                     .createAgentWeb()
                     .ready()
-                    .go("https://zelda.xisj.com/map/");
+                    .go("http://zelda.xisj.com/map/");
         } else {
             String url = context.getExternalFilesDir(null).getPath() + "/MapResource/Index.html";
             agentWeb = AgentWeb.with(this)
