@@ -23,7 +23,7 @@ import butterknife.BindView;
 import rx.Observable;
 
 
-public class WholeFlowFragment extends BaseFragment implements GuideView {
+public class MainQuestFragment extends BaseFragment implements GuideView {
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -33,9 +33,9 @@ public class WholeFlowFragment extends BaseFragment implements GuideView {
 
     private GuideAdapter guideAdapter;
 
-    public static WholeFlowFragment newInstance() {
+    public static MainQuestFragment newInstance() {
         Bundle args = new Bundle();
-        WholeFlowFragment fragment = new WholeFlowFragment();
+        MainQuestFragment fragment = new MainQuestFragment();
         fragment.setArguments(args);
         return fragment;
     }

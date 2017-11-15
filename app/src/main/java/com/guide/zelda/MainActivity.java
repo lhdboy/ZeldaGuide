@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.guide.zelda.common.LogUtil;
+import com.blankj.utilcode.util.LogUtils;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerActivityComponent;
 import com.guide.zelda.home.MainFragment;
@@ -31,7 +31,7 @@ public class MainActivity extends SupportActivity {
             @Override
             public void onFragmentResumed(FragmentManager fm, Fragment fragment) {
                 super.onFragmentResumed(fm, fragment);
-                LogUtil.i(TAG, "onFragmentSupportVisible:" + fragment.getClass().getSimpleName());
+                LogUtils.i(TAG, "onFragmentSupportVisible:" + fragment.getClass().getSimpleName());
             }
 
             @Override

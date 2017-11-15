@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.guide.zelda.R;
 import com.guide.zelda.base.BaseActivity;
 import com.guide.zelda.base.BaseFragment;
-import com.guide.zelda.common.LogUtil;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.map.MapFragment;
 import com.guide.zelda.widget.TitleView;
@@ -48,9 +48,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initView() {
-        BaseFragment fragment = findFragment(WholeFlowFragment.class);
+        BaseFragment fragment = findFragment(MainQuestFragment.class);
         if (fragment == null) {
-            loadRootFragment(R.id.fl_container, WholeFlowFragment.newInstance());
+            loadRootFragment(R.id.fl_container, MainQuestFragment.newInstance());
         }
         navigationView.setNavigationItemSelectedListener(this);
         titleView.centerTitle(R.string.main_tab_whole_flow);
@@ -89,7 +89,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         } else {
             ISupportFragment topFragment = getTopFragment();
 
-            if (topFragment instanceof WholeFlowFragment) {
+            if (topFragment instanceof MainQuestFragment) {
                 navigationView.setCheckedItem(R.id.nav_whole_flow);
             }
 
@@ -111,20 +111,20 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         final ISupportFragment topFragment = getTopFragment();
-        LogUtil.d("TAG", "topFragment: " + topFragment.getClass().getSimpleName());
+        LogUtils.d("TAG", "topFragment: " + topFragment.getClass().getSimpleName());
         if (id == R.id.nav_whole_flow) {
             titleView.centerTitle(R.string.main_tab_whole_flow);
-            WholeFlowFragment fragment = findFragment(WholeFlowFragment.class);
+            MainQuestFragment fragment = findFragment(MainQuestFragment.class);
             if (fragment == null) {
-                start(WholeFlowFragment.newInstance());
+                start(MainQuestFragment.newInstance());
             } else {
                 start(fragment, SupportFragment.SINGLETASK);
             }
         } else if (id == R.id.nav_newest) {
             titleView.centerTitle(R.string.main_tab_newest);
-            NewestFragment fragment = findFragment(NewestFragment.class);
+            UserShareFragment fragment = findFragment(UserShareFragment.class);
             if (fragment == null) {
-                start(NewestFragment.newInstance());
+                start(UserShareFragment.newInstance());
             } else {
                 start(fragment, SupportFragment.SINGLETASK);
             }

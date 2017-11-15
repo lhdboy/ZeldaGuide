@@ -5,14 +5,17 @@ import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.guide.zelda.R;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerFragmentComponent;
+import com.guide.zelda.home.MainFragment;
 import com.guide.zelda.widget.TitleView;
 import com.just.library.AgentWeb;
 import com.just.library.WebDefaultSettingsManager;
@@ -26,6 +29,8 @@ import rx.Observable;
 
 public class MapFragment extends BaseFragment implements MapView {
 
+    private static final String TAG = MainFragment.class.getSimpleName();
+
     @BindView(R.id.layout_root)
     LinearLayout layoutRoot;
     @BindView(R.id.layout_progress)
@@ -36,11 +41,14 @@ public class MapFragment extends BaseFragment implements MapView {
     TextView tvProgress;
     @BindView(R.id.pb_download)
     ProgressBar progressBar;
+    @BindView(R.id.btn_download)
+    Button btnDownload;
 
     @Inject
     MapPresenter presenter;
 
     private AgentWeb agentWeb;
+    private boolean downloading;
 
     private WebViewClient mWebViewClient = new WebViewClient() {
         @Override
@@ -124,9 +132,27 @@ public class MapFragment extends BaseFragment implements MapView {
         progressBar.setProgress(progress);
     }
 
+    @Override
+    public void downloadPause() {
+        btnDownload.setText(R.string.continue_download);
+    }
+
+    @Override
+    public void downloadFinish(boolean success) {
+        ToastUtils.showShort("downloadFinish");
+        downloading = false;
+    }
+
     @OnClick(R.id.btn_download)
     void download() {
-        presenter.downloadMap();
+        if (downloading) {
+            presenter.pause();
+            downloading = false;
+        } else {
+            downloading = true;
+            presenter.downloadMap();
+            btnDownload.setText(R.string.pause_download);
+        }
     }
 
     @Override

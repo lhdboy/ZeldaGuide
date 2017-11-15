@@ -23,8 +23,7 @@ import butterknife.BindView;
 import rx.Observable;
 
 
-public class NewestFragment extends BaseFragment implements GuideView {
-    private static final String CATE = "《塞尔达传说：野之息》";
+public class UserShareFragment extends BaseFragment implements GuideView {
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -34,9 +33,9 @@ public class NewestFragment extends BaseFragment implements GuideView {
 
     private GuideAdapter guideAdapter;
 
-    public static NewestFragment newInstance() {
+    public static UserShareFragment newInstance() {
         Bundle args = new Bundle();
-        NewestFragment fragment = new NewestFragment();
+        UserShareFragment fragment = new UserShareFragment();
         fragment.setArguments(args);
         return fragment;
     }

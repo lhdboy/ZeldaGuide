@@ -1,5 +1,7 @@
 package com.guide.zelda.common;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -37,15 +39,15 @@ public final class ExponentialBackoff implements
         return attempts.flatMap(throwable -> {
             if (maxRetries < CRITICAL_POINT_RETRY_COUNT) {
                 if (retryCount++ < maxRetries) {
-                    LogUtil.d(TAG, "retry " + retryCount + " times");
+                    LogUtils.d(TAG, "retry " + retryCount + " times");
                     return Observable.timer((long) Math.pow(interval, retryCount), timeUnit, Schedulers.immediate());
                 }
             } else {
                 if (retryCount++ < CRITICAL_POINT_RETRY_COUNT) {
-                    LogUtil.d(TAG, "retry " + retryCount + " times");
+                    LogUtils.d(TAG, "retry " + retryCount + " times");
                     return Observable.timer((long) Math.pow(interval, retryCount), timeUnit, Schedulers.immediate());
                 } else {
-                    LogUtil.d(TAG, "retry " + retryCount + " times");
+                    LogUtils.d(TAG, "retry " + retryCount + " times");
                     return Observable.timer((long) Math.pow(interval, CRITICAL_POINT_RETRY_COUNT), timeUnit, Schedulers.immediate());
                 }
             }

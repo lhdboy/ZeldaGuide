@@ -132,9 +132,9 @@ public class MainFragment extends BaseFragment implements MainView {
         @Override
         public BaseFragment getItem(int position) {
             if (position == 0) {
-                return WholeFlowFragment.newInstance();
+                return MainQuestFragment.newInstance();
             } else if (position == 1){
-                return NewestFragment.newInstance();
+                return UserShareFragment.newInstance();
             } else  {
                 return MapFragment.newInstance();
             }

@@ -3,7 +3,6 @@ package com.guide.zelda;
 import android.app.Application;
 
 import com.blankj.utilcode.util.Utils;
-import com.guide.zelda.common.LogUtil;
 import com.guide.zelda.db.GuideRepository;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerApplicationComponent;
@@ -31,7 +30,6 @@ public class AppApplication extends Application {
     private void init() {
         FlowManager.init(new FlowConfig.Builder(this).build());
         FileDownloader.setupOnApplicationOnCreate(this);
-        LogUtil.init();
         initializeInjector();
         Utils.init(this);
         guideRepository.copyDB2Storage(this);

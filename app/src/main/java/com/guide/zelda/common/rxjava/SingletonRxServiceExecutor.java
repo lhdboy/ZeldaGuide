@@ -3,7 +3,7 @@ package com.guide.zelda.common.rxjava;
 
 import android.support.annotation.NonNull;
 
-import com.guide.zelda.common.LogUtil;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -123,7 +123,7 @@ public class SingletonRxServiceExecutor implements RxServiceExecutor {
     @NonNull
     private Action1<Throwable> getDefaultOnError() {
         return error -> {
-            LogUtil.e(TAG, "onError: " + error.toString(), error);
+            LogUtils.e(TAG, "onError: " + error.toString(), error);
             error.printStackTrace();
         };
     }

@@ -1,9 +1,9 @@
 package com.guide.zelda.di.component;
 
 
+import com.guide.zelda.home.UserShareFragment;
 import com.guide.zelda.map.MapFragment;
-import com.guide.zelda.home.NewestFragment;
-import com.guide.zelda.home.WholeFlowFragment;
+import com.guide.zelda.home.MainQuestFragment;
 import com.guide.zelda.web.WebViewFragment;
 import com.guide.zelda.di.Scopes;
 import com.guide.zelda.di.module.FragmentModule;
@@ -19,9 +19,9 @@ public interface FragmentComponent {
 
     void inject(WebViewFragment fragment);
 
-    void inject(WholeFlowFragment flowFragment);
+    void inject(MainQuestFragment flowFragment);
 
-    void inject(NewestFragment fragment);
+    void inject(UserShareFragment fragment);
 
     void inject(MapFragment fragment);
 
