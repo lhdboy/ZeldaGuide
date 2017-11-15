@@ -9,6 +9,7 @@ import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerApplicationComponent;
 import com.guide.zelda.di.module.ApiModule;
 import com.guide.zelda.di.module.ApplicationModule;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -29,6 +30,7 @@ public class AppApplication extends Application {
 
     private void init() {
         FlowManager.init(new FlowConfig.Builder(this).build());
+        FileDownloader.setupOnApplicationOnCreate(this);
         LogUtil.init();
         initializeInjector();
         Utils.init(this);
