@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/iv_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/title_img_size"
+        android:layout_height="@dimen/title_img_size"
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
         android:src="@drawable/ic_back_black" />
@@ -48,8 +48,8 @@
 
     <ImageView
         android:id="@+id/iv_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/title_img_size"
+        android:layout_height="@dimen/title_img_size"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="5dp"

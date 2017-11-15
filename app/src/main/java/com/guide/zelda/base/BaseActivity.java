@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 
 import com.guide.zelda.AppApplication;
 import com.guide.zelda.di.component.ApplicationComponent;
+import com.jaeger.library.StatusBarUtil;
 
 import butterknife.ButterKnife;
 
@@ -30,6 +31,7 @@ public abstract class BaseActivity extends RxLifecycleActivity {
         setupActivityComponent(((AppApplication) getApplication()).getApplicationComponent());
         initView();
         init();
+        StatusBarUtil.setTranslucent(this, 70);
     }
 
 }

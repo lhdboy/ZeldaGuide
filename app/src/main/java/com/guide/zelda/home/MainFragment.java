@@ -38,14 +38,8 @@ public class MainFragment extends BaseFragment implements MainView {
     @BindView(R.id.view_pager)
     NoScrollViewPager viewPager;
 
-    public static final int TAB_SETTING = 0;
-    public static final int TAB_STORE = 1;
-    public static final int TAB_PROFILE = 2;
-    public static final int TAB_COUNT = 3;
-
     @Inject
     MainPresenter presenter;
-    private BaseFragment[] fragments = new BaseFragment[TAB_COUNT];
 
     private int[] titleTextData = new int[]{R.string.main_tab_whole_flow, R.string.main_tab_newest, R.string.main_tab_map};
 
