@@ -12,8 +12,8 @@ import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.db.model.GuideModel;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerFragmentComponent;
+import com.guide.zelda.web.WebActivity;
 import com.guide.zelda.widget.TitleView;
-import com.guide.zelda.widget.WebViewFragment;
 
 import java.util.List;
 
@@ -65,12 +65,7 @@ public class NewestFragment extends BaseFragment implements GuideView {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 GuideModel model = (GuideModel) adapter.getItem(position);
-                String name = model.name;
-                if (name.contains(CATE)) {
-                    name = name.substring(0, CATE.length());
-                }
-                WebViewFragment fragment = WebViewFragment.newInstance(name, "file:///android_asset/Guide/" + model.file_name);
-                start(fragment);
+                WebActivity.startWebFragment(context,"file:///android_asset/Guide/" + model.file_name);
             }
         });
     }

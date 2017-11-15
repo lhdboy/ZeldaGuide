@@ -1,14 +1,13 @@
-package com.guide.zelda.widget;
+package com.guide.zelda.web;
 
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.guide.zelda.R;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerFragmentComponent;
+import com.guide.zelda.widget.TitleView;
 import com.just.library.AgentWeb;
 import com.just.library.WebDefaultSettingsManager;
 
@@ -21,9 +20,8 @@ public class WebViewFragment extends BaseFragment {
     LinearLayout layoutWeb;
     private AgentWeb agentWeb;
 
-    public static WebViewFragment newInstance(String title, String url) {
+    public static WebViewFragment newInstance(String url) {
         Bundle args = new Bundle();
-        args.putString("key_title", title);
         args.putString("key_url", url);
         WebViewFragment fragment = new WebViewFragment();
         fragment.setArguments(args);
@@ -32,7 +30,7 @@ public class WebViewFragment extends BaseFragment {
 
     @Override
     protected int getContentLayoutId() {
-        return R.layout.fragment_base_web;
+        return R.layout.fragment_web;
     }
 
     @Override
@@ -42,12 +40,9 @@ public class WebViewFragment extends BaseFragment {
 
     @Override
     protected void initView(TitleView titleView, Bundle savedInstanceState) {
-        String title = getArguments().getString("key_title");
-        if (TextUtils.isEmpty(title)) titleView.setVisibility(View.GONE);
-        titleView.centerTitle(title);
         titleView.clickLeft(l -> {
             if (!agentWeb.back()) {
-                pop();
+                getActivity().finish();
             }
         });
     }

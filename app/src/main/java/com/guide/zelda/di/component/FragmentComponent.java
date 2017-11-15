@@ -4,7 +4,7 @@ package com.guide.zelda.di.component;
 import com.guide.zelda.map.MapFragment;
 import com.guide.zelda.home.NewestFragment;
 import com.guide.zelda.home.WholeFlowFragment;
-import com.guide.zelda.widget.WebViewFragment;
+import com.guide.zelda.web.WebViewFragment;
 import com.guide.zelda.di.Scopes;
 import com.guide.zelda.di.module.FragmentModule;
 import com.guide.zelda.home.MainFragment;

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">荒野之息助手</string>
-    <string name="main_tab_whole_flow">主线</string>
-    <string name="main_tab_newest">最新</string>
+    <string name="main_tab_whole_flow">主线任务</string>
+    <string name="main_tab_newest">玩家分享</string>
     <string name="main_tab_map">地图</string>
     <string name="downloading">下载中</string>
     <string name="map_resource">地图资源</string>

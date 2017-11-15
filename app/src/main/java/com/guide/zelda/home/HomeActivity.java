@@ -21,6 +21,7 @@ import com.guide.zelda.widget.TitleView;
 import butterknife.BindView;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -74,6 +75,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void init() {
 
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new FragmentAnimator();
     }
 
     @Override
