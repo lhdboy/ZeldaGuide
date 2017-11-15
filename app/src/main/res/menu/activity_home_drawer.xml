@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_menu_map"
+            android:title="@string/main_tab_map" />
+        <item
             android:id="@+id/nav_whole_flow"
             android:icon="@drawable/ic_menu_whole_flow"
             android:title="@string/main_tab_whole_flow" />
@@ -12,10 +16,6 @@
             android:id="@+id/nav_newest"
             android:icon="@drawable/ic_menu_share"
             android:title="@string/main_tab_newest" />
-        <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/ic_menu_map"
-            android:title="@string/main_tab_map" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

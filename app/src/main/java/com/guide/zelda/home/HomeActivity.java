@@ -48,12 +48,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initView() {
-        BaseFragment fragment = findFragment(MainQuestFragment.class);
+        BaseFragment fragment = findFragment(MapFragment.class);
         if (fragment == null) {
-            loadRootFragment(R.id.fl_container, MainQuestFragment.newInstance());
+            loadRootFragment(R.id.fl_container, MapFragment.newInstance());
         }
         navigationView.setNavigationItemSelectedListener(this);
-        titleView.centerTitle(R.string.main_tab_whole_flow);
+        titleView.centerTitle(R.string.main_tab_map);
         titleView.leftImage(R.drawable.ic_drawer);
         titleView.clickLeft(l -> {
             if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -87,12 +87,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            ISupportFragment topFragment = getTopFragment();
-
-            if (topFragment instanceof MainQuestFragment) {
-                navigationView.setCheckedItem(R.id.nav_whole_flow);
-            }
-
             if (getFragmentManager().getBackStackEntryCount() > 1) {
                 pop();
             } else {
@@ -112,7 +106,15 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
         final ISupportFragment topFragment = getTopFragment();
         LogUtils.d("TAG", "topFragment: " + topFragment.getClass().getSimpleName());
-        if (id == R.id.nav_whole_flow) {
+        if (id == R.id.nav_map) {
+            titleView.centerTitle(R.string.main_tab_map);
+            MapFragment fragment = findFragment(MapFragment.class);
+            if (fragment == null) {
+                start(MapFragment.newInstance());
+            } else {
+                popTo(MapFragment.class, false);
+            }
+        } else if (id == R.id.nav_whole_flow) {
             titleView.centerTitle(R.string.main_tab_whole_flow);
             MainQuestFragment fragment = findFragment(MainQuestFragment.class);
             if (fragment == null) {
@@ -127,14 +129,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 start(UserShareFragment.newInstance());
             } else {
                 start(fragment, SupportFragment.SINGLETASK);
-            }
-        } else if (id == R.id.nav_map) {
-            titleView.centerTitle(R.string.main_tab_map);
-            MapFragment fragment = findFragment(MapFragment.class);
-            if (fragment == null) {
-                start(MapFragment.newInstance());
-            } else {
-                popTo(MapFragment.class, false);
             }
         } else if (id == R.id.nav_manage) {
 

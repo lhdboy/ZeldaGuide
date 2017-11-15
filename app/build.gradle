@@ -38,7 +38,7 @@ dependencies {
     compile 'net.orange-box.storebox:storebox-lib:1.4.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
-    compile 'me.yokeyword:fragmentation:1.1.7'
+    compile 'me.yokeyword:fragmentation:1.1.8'
     compile 'com.orhanobut:logger:2.1.1'
     compile 'com.blankj:utilcode:1.9.5'
     compile 'com.just.agentweb:agentweb:2.0.1'
