@@ -51,6 +51,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             loadRootFragment(R.id.fl_container, WholeFlowFragment.newInstance());
         }
         navigationView.setNavigationItemSelectedListener(this);
+        titleView.centerTitle(R.string.main_tab_whole_flow);
         titleView.leftImage(R.drawable.ic_drawer);
         titleView.clickLeft(l -> {
             if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
