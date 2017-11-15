@@ -65,7 +65,7 @@ public class WholeFlowFragment extends BaseFragment implements GuideView {
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 GuideModel model = (GuideModel) adapter.getItem(position);
                 WebViewFragment fragment = WebViewFragment.newInstance(model.name, "file:///android_asset/Guide/" + model.file_name);
-                startFragment(fragment);
+                start(fragment);
             }
         });
     }

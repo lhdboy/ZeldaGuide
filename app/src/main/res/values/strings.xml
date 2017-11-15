@@ -14,4 +14,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="web_url">https://github.com/Mrxxy</string>
+    <string name="download_map_tip">地图资源缺失，要使用地图请先下载地图资源。\n地图资源大小大约占用254MB存储空间，开始下载前请尽量确保您的手机已连接WiFi网络。</string>
+    <string name="start_download">开始下载</string>
+    <string name="download_progress">%1$s/254MB(%2$d)</string>
 </resources>

@@ -15,6 +15,7 @@ import com.guide.zelda.base.BaseActivity;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.common.LogUtil;
 import com.guide.zelda.di.component.ApplicationComponent;
+import com.guide.zelda.map.MapFragment;
 import com.guide.zelda.widget.TitleView;
 
 import butterknife.BindView;

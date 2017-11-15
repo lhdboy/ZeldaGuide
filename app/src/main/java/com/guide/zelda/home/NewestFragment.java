@@ -70,7 +70,7 @@ public class NewestFragment extends BaseFragment implements GuideView {
                     name = name.substring(0, CATE.length());
                 }
                 WebViewFragment fragment = WebViewFragment.newInstance(name, "file:///android_asset/Guide/" + model.file_name);
-                startFragment(fragment);
+                start(fragment);
             }
         });
     }

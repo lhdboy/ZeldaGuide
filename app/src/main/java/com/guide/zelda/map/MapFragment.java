@@ -1,19 +1,18 @@
-package com.guide.zelda.home;
+package com.guide.zelda.map;
 
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.guide.zelda.R;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerFragmentComponent;
-import com.guide.zelda.map.MapPresenter;
-import com.guide.zelda.map.MapView;
 import com.guide.zelda.widget.TitleView;
 import com.just.library.AgentWeb;
 import com.just.library.WebDefaultSettingsManager;
@@ -21,6 +20,7 @@ import com.just.library.WebDefaultSettingsManager;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import rx.Observable;
 
 
@@ -28,6 +28,14 @@ public class MapFragment extends BaseFragment implements MapView {
 
     @BindView(R.id.layout_root)
     LinearLayout layoutRoot;
+    @BindView(R.id.layout_progress)
+    LinearLayout layoutProgress;
+    @BindView(R.id.layout_map_tip)
+    LinearLayout layoutMapTip;
+    @BindView(R.id.tv_progress)
+    TextView tvProgress;
+    @BindView(R.id.pb_download)
+    ProgressBar progressBar;
 
     @Inject
     MapPresenter presenter;
@@ -86,25 +94,16 @@ public class MapFragment extends BaseFragment implements MapView {
 
     @Override
     public void onResume() {
-//        agentWeb.getWebLifeCycle().onResume();
+        if (agentWeb != null)
+            agentWeb.getWebLifeCycle().onResume();
         super.onResume();
         presenter.onResume();
     }
 
     @Override
-    public void showDownloadDialog(boolean show) {
-        if (show) {
-            showDownloadDialog();
-            agentWeb = AgentWeb.with(this)
-                    .setAgentWebParent(layoutRoot, new LinearLayout.LayoutParams(-1, -1))
-                    .useDefaultIndicator()
-                    .setAgentWebWebSettings(WebDefaultSettingsManager.getInstance())
-                    .setWebViewClient(mWebViewClient)
-                    .setReceivedTitleCallback((view, title) -> titleView.centerTitle(title))
-                    .createAgentWeb()
-                    .ready()
-                    .go("http://zelda.xisj.com/map/");
-        } else {
+    public void showDownloadTip(boolean show) {
+        layoutMapTip.setVisibility(show ? View.VISIBLE : View.GONE);
+        if (!show) {
             String url = context.getExternalFilesDir(null).getPath() + "/MapResource/Index.html";
             agentWeb = AgentWeb.with(this)
                     .setAgentWebParent(layoutRoot, new LinearLayout.LayoutParams(-1, -1))
@@ -118,16 +117,16 @@ public class MapFragment extends BaseFragment implements MapView {
         }
     }
 
-    private void showDownloadDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("提示").setMessage("未发现地图资源，下载后体验更佳。（Tips:需下载250Mb左右，请链接WiFi下载））")
-                .setPositiveButton(R.string.confirm, (dialog, which) -> {
-                    presenter.downloadMap();
-                    dialog.dismiss();
-                })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    @Override
+    public void updateProgress(String downloadSize, int progress) {
+        layoutProgress.setVisibility(View.VISIBLE);
+        tvProgress.setText(getString(R.string.download_progress, downloadSize, progress));
+        progressBar.setProgress(progress);
+    }
+
+    @OnClick(R.id.btn_download)
+    void download() {
+        presenter.downloadMap();
     }
 
     @Override
@@ -142,13 +141,15 @@ public class MapFragment extends BaseFragment implements MapView {
 
     @Override
     public void onPause() {
-        agentWeb.getWebLifeCycle().onPause();
+        if (agentWeb != null)
+            agentWeb.getWebLifeCycle().onPause();
         super.onPause();
     }
 
     @Override
     public void onDestroyView() {
-        agentWeb.getWebLifeCycle().onDestroy();
+        if (agentWeb != null)
+            agentWeb.getWebLifeCycle().onDestroy();
         super.onDestroyView();
     }
 

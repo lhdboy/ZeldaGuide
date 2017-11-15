@@ -5,6 +5,7 @@ import com.guide.zelda.base.MvpView;
 
 public interface MapView extends MvpView {
 
-    void showDownloadDialog(boolean show);
+    void showDownloadTip(boolean show);
 
+    void updateProgress(String downloadSize, int progress);
 }

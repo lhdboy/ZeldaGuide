@@ -11,6 +11,7 @@ import com.guide.zelda.R;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.di.component.ApplicationComponent;
 import com.guide.zelda.di.component.DaggerFragmentComponent;
+import com.guide.zelda.map.MapFragment;
 import com.guide.zelda.widget.NoScrollViewPager;
 import com.guide.zelda.widget.TitleView;
 

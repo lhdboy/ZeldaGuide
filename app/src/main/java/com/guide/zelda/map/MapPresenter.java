@@ -47,7 +47,7 @@ public class MapPresenter extends BasePresenter<MapView> {
 
     public void onResume() {
         File file = new File(getMapPath());
-        getMvpView().showDownloadDialog(!file.exists());
+        getMvpView().showDownloadTip(!file.exists());
     }
 
     public void downloadMap() {
@@ -64,6 +64,7 @@ public class MapPresenter extends BasePresenter<MapView> {
                                 .setContentText(context.getString(R.string.downloading)
                                         + "  " + CommonUtils.getPrintSize(task.getSpeed() * 1024) + "/s");
                         notificationManager.notify(NOTIFICATION_ID, builder.build());
+                        getMvpView().updateProgress(CommonUtils.getPrintSize(soFarBytes), (int) ((soFarBytes * 1.0f / totalBytes) * 100));
                     }
 
                     @Override
