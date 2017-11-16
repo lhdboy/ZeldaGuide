@@ -3,9 +3,12 @@ package com.guide.zelda.map;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ZipUtils;
 import com.guide.zelda.R;
 import com.guide.zelda.base.BasePresenter;
 import com.guide.zelda.common.utils.CommonUtils;
@@ -14,6 +17,7 @@ import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -53,10 +57,11 @@ public class MapPresenter extends BasePresenter<MapView> {
     }
 
     void downloadMap() {
-        String path = context.getExternalFilesDir(null).getPath();
+        String fileDir = context.getExternalFilesDir(null).getPath();
+        String path = fileDir + "/MapResource.zip";
         initNotification();
         downloadId = FileDownloader.getImpl().create("http://7xt7n1.com2.z0.glb.qiniucdn.com/zelda/MapResource.zip")
-                .setPath(path + "/MapResource.zip")
+                .setPath(path)
                 .setListener(new FileDownloadSampleListener() {
 
                     @Override
@@ -70,7 +75,9 @@ public class MapPresenter extends BasePresenter<MapView> {
 
                     @Override
                     protected void completed(BaseDownloadTask task) {
-                        getMvpView().downloadFinish(true);
+                        LogUtils.d(TAG, "completed");
+                        getMvpView().updateProgress("238MB", 100);
+                        new UnzipTask(fileDir).execute(task.getPath());
                     }
 
                     @Override
@@ -82,7 +89,7 @@ public class MapPresenter extends BasePresenter<MapView> {
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
                         LogUtils.e(TAG, "download error" + e.getMessage());
-                        getMvpView().downloadFinish(false);
+                        getMvpView().downloadComplete(false);
                     }
 
                 }).setAutoRetryTimes(3).start();
@@ -94,6 +101,38 @@ public class MapPresenter extends BasePresenter<MapView> {
 
     private String getMapPath() {
         return context.getExternalFilesDir(null) + File.separator + "MapResource/Index.html";
+    }
+
+    private class UnzipTask extends AsyncTask<String, Void, Boolean> {
+        private String path;
+
+        public UnzipTask(String path) {
+            this.path = path;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            getMvpView().unzipFile();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... voids) {
+            try {
+                ZipUtils.unzipFile(voids[0], path + "/MapResource");
+            } catch (IOException e) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
+            getMvpView().downloadComplete(success);
+            if (success) {
+                FileUtils.deleteFile(path + "/MapResource.zip");
+            }
+        }
     }
 
 }

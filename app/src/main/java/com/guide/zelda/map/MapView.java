@@ -11,6 +11,7 @@ public interface MapView extends MvpView {
 
     void downloadPause();
 
-    void downloadFinish(boolean success);
+    void downloadComplete(boolean success);
 
+    void unzipFile();
 }

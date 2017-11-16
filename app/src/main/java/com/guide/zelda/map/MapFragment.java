@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.guide.zelda.R;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.di.component.ApplicationComponent;
@@ -138,9 +137,16 @@ public class MapFragment extends BaseFragment implements MapView {
     }
 
     @Override
-    public void downloadFinish(boolean success) {
-        ToastUtils.showShort("downloadFinish");
+    public void downloadComplete(boolean finish) {
         downloading = false;
+        btnDownload.setEnabled(true);
+        showDownloadTip(true);
+    }
+
+    @Override
+    public void unzipFile() {
+        btnDownload.setText(R.string.unzip_file);
+        btnDownload.setEnabled(false);
     }
 
     @OnClick(R.id.btn_download)
