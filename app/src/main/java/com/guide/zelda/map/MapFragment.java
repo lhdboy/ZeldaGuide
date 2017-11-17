@@ -1,15 +1,17 @@
 package com.guide.zelda.map;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.guide.zelda.R;
 import com.guide.zelda.base.BaseFragment;
 import com.guide.zelda.di.component.ApplicationComponent;
@@ -31,7 +33,7 @@ public class MapFragment extends BaseFragment implements MapView {
     private static final String TAG = MainFragment.class.getSimpleName();
 
     @BindView(R.id.layout_root)
-    LinearLayout layoutRoot;
+    FrameLayout layoutRoot;
     @BindView(R.id.layout_progress)
     LinearLayout layoutProgress;
     @BindView(R.id.layout_map_tip)
@@ -42,6 +44,8 @@ public class MapFragment extends BaseFragment implements MapView {
     ProgressBar progressBar;
     @BindView(R.id.btn_download)
     Button btnDownload;
+    @BindView(R.id.btn_back)
+    FloatingActionButton btnBack;
 
     @Inject
     MapPresenter presenter;
@@ -50,17 +54,11 @@ public class MapFragment extends BaseFragment implements MapView {
     private boolean downloading;
 
     private WebViewClient mWebViewClient = new WebViewClient() {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            String str = request.getUrl().toString();
-            if (str.startsWith("http")) {
-//                MapFragment.this.mListener.onFragmentInteraction(Uri.parse(str));
-            }
-            return super.shouldOverrideUrlLoading(view, request);
-        }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            LogUtils.d(TAG, url);
+            btnBack.setVisibility(View.VISIBLE);
             return super.shouldOverrideUrlLoading(view, url);
         }
     };
@@ -85,16 +83,11 @@ public class MapFragment extends BaseFragment implements MapView {
     @Override
     protected void initView(TitleView titleView, Bundle savedInstanceState) {
         presenter.attachView(this);
-        titleView.clickLeft(l -> {
-            if (!agentWeb.back()) {
-                doBack();
-            }
-        });
+        titleView.setVisibility(View.GONE);
     }
 
     @Override
     protected void init() {
-        titleView.setVisibility(View.GONE);
 //        String js = "$(\"#TypeSwitch li[data-type='" + 1926 + "']\").click()";
 //        agentWeb.getJsEntraceAccess().quickCallJs(js);
     }
@@ -113,14 +106,14 @@ public class MapFragment extends BaseFragment implements MapView {
         if (!show) {
             String url = context.getExternalFilesDir(null).getPath() + "/MapResource/Index.html";
             agentWeb = AgentWeb.with(this)
-                    .setAgentWebParent(layoutRoot, new LinearLayout.LayoutParams(-1, -1))
+                    .setAgentWebParent(layoutRoot, new FrameLayout.LayoutParams(-1, -1))
                     .useDefaultIndicator()
                     .setAgentWebWebSettings(WebDefaultSettingsManager.getInstance())
                     .setWebViewClient(mWebViewClient)
                     .setReceivedTitleCallback((view, title) -> titleView.centerTitle(title))
                     .createAgentWeb()
                     .ready()
-                    .go(url);
+                    .go("file:///" + url);
         }
     }
 
@@ -140,7 +133,7 @@ public class MapFragment extends BaseFragment implements MapView {
     public void downloadComplete(boolean finish) {
         downloading = false;
         btnDownload.setEnabled(true);
-        showDownloadTip(true);
+        showDownloadTip(false);
     }
 
     @Override
@@ -158,6 +151,13 @@ public class MapFragment extends BaseFragment implements MapView {
             downloading = true;
             presenter.downloadMap();
             btnDownload.setText(R.string.pause_download);
+        }
+    }
+
+    @OnClick(R.id.btn_back)
+    void back() {
+        if (!agentWeb.back()) {
+            btnBack.setVisibility(View.GONE);
         }
     }
 
