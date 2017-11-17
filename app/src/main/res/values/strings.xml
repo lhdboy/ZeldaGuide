@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">荒野之息助手</string>
-    <string name="main_tab_whole_flow">主线任务</string>
-    <string name="main_tab_newest">玩家分享</string>
-    <string name="main_tab_map">地图</string>
+    <string name="menu_whole_flow">主线任务</string>
+    <string name="menu_newest">玩家分享</string>
+    <string name="menu_map">地图</string>
     <string name="downloading">下载中</string>
     <string name="map_resource">地图资源</string>
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
-    <string name="title_activity_home">HomeActivity</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string name="web_url">https://github.com/Mrxxy</string>
@@ -19,5 +15,6 @@
     <string name="download_progress">%1$s/238MB (%2$d%%)</string>
     <string name="pause_download">暂停</string>
     <string name="continue_download">继续下载</string>
-    <string name="unzip_file">解压中，请稍后</string>
+    <string name="unzip_file">解压中，请不要关闭程序</string>
+    <string name="map_download_url">http://7xt7n1.com2.z0.glb.qiniucdn.com/zelda/MapResource_trim.zip</string>
 </resources>

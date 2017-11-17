@@ -60,7 +60,7 @@ public class MapPresenter extends BasePresenter<MapView> {
         String fileDir = context.getExternalFilesDir(null).getPath();
         String path = fileDir + "/MapResource.zip";
         initNotification();
-        downloadId = FileDownloader.getImpl().create("http://7xt7n1.com2.z0.glb.qiniucdn.com/zelda/MapResource.zip")
+        downloadId = FileDownloader.getImpl().create(context.getString(R.string.map_download_url))
                 .setPath(path)
                 .setListener(new FileDownloadSampleListener() {
 

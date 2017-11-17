@@ -42,7 +42,7 @@ public class MainFragment extends BaseFragment implements MainView {
     @Inject
     MainPresenter presenter;
 
-    private int[] titleTextData = new int[]{R.string.main_tab_whole_flow, R.string.main_tab_newest, R.string.main_tab_map};
+    private int[] titleTextData = new int[]{R.string.menu_whole_flow, R.string.menu_newest, R.string.menu_map};
 
     public static MainFragment newInstance() {
         Bundle args = new Bundle();

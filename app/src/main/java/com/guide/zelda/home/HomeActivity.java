@@ -53,7 +53,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             loadRootFragment(R.id.fl_container, MapFragment.newInstance());
         }
         navigationView.setNavigationItemSelectedListener(this);
-        titleView.centerTitle(R.string.main_tab_map);
+        titleView.centerTitle(R.string.menu_map);
         titleView.leftImage(R.drawable.ic_drawer);
         titleView.clickLeft(l -> {
             if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -107,7 +107,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         final ISupportFragment topFragment = getTopFragment();
         LogUtils.d("TAG", "topFragment: " + topFragment.getClass().getSimpleName());
         if (id == R.id.nav_map) {
-            titleView.centerTitle(R.string.main_tab_map);
+            titleView.centerTitle(R.string.menu_map);
             MapFragment fragment = findFragment(MapFragment.class);
             if (fragment == null) {
                 start(MapFragment.newInstance());
@@ -115,7 +115,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 popTo(MapFragment.class, false);
             }
         } else if (id == R.id.nav_whole_flow) {
-            titleView.centerTitle(R.string.main_tab_whole_flow);
+            titleView.centerTitle(R.string.menu_whole_flow);
             MainQuestFragment fragment = findFragment(MainQuestFragment.class);
             if (fragment == null) {
                 start(MainQuestFragment.newInstance());
@@ -123,7 +123,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 start(fragment, SupportFragment.SINGLETASK);
             }
         } else if (id == R.id.nav_newest) {
-            titleView.centerTitle(R.string.main_tab_newest);
+            titleView.centerTitle(R.string.menu_newest);
             UserShareFragment fragment = findFragment(UserShareFragment.class);
             if (fragment == null) {
                 start(UserShareFragment.newInstance());
