@@ -16,5 +16,5 @@
     <string name="pause_download">暂停</string>
     <string name="continue_download">继续下载</string>
     <string name="unzip_file">解压中，请不要关闭程序</string>
-    <string name="map_download_url">http://7xt7n1.com2.z0.glb.qiniucdn.com/zelda/MapResource_trim.zip</string>
+    <string name="map_download_url">http://ts-assets.oss-cn-shanghai.aliyuncs.com/MapResource.zip</string>
 </resources>
